@@ -1,0 +1,6 @@
+# Ignore IntelliJ IDEA / Android Studio specific files
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
