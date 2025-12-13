@@ -17,4 +17,7 @@ public class Solution9 {
 
         return x == reverse;
     }
+
+    
 }
+
