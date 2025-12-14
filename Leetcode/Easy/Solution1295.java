@@ -2,12 +2,21 @@ package Leetcode.Easy;
 
 public class Solution1295 {
     public int findNumbers(int[] nums) {
-        int count =0;
-        for(int num: nums){
-            if(String.valueOf(num).length()%2==0){
-                count+=1;
+        int counter = 0;
+        for (int num : nums) {
+            int digits = 0;
+
+            if (num == 0) {
+                digits = 1;
+            }
+            while (num > 0) {
+                num = num / 10;
+                digits++;
+            }
+            if ((digits & 1) == 0) {
+                counter++;
             }
         }
-        return count;
+        return counter;
     }
 }
