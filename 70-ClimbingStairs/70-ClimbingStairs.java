@@ -1,0 +1,17 @@
+// Last updated: 6/4/2026, 7:25:04 PM
+class Solution {
+    public int climbStairs(int n) {
+        if(n==1) {
+            return 1;
+        }
+        int[] step = new int[n+1];
+        step[1] = 1;
+        step[2] = 2;
+
+        for(int i=3; i<=n; i++){
+            step[i] = step[i-1] + step[i-2];
+        }
+
+        return step[n];
+    }
+}
