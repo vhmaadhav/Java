@@ -1,13 +1,11 @@
-// Last updated: 6/4/2026, 7:24:49 PM
-class Solution {
-    public boolean isAnagram(String s, String t) {
-        if (s.length() != t.length()) return false;
-        int[] f = new int[26];
-        for (int i = 0; i < s.length(); i++) {
-            f[s.charAt(i) - 'a']++;
-            f[t.charAt(i) - 'a']--;
-        }
-        for (int x : f) if (x != 0) return false;
-        return true;
-    }
-}
+// Last updated: 6/8/2026, 9:01:47 PM
+1class Solution {
+2    public boolean isAnagram(String s, String t) {
+3       char[] snew = s.toCharArray();
+4       char[] tnew = t.toCharArray();
+5        Arrays.sort(snew);
+6        Arrays.sort(tnew);
+7       return Arrays.equals(snew,tnew);
+8    }
+9    
+10}
