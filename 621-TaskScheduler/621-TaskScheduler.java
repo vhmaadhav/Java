@@ -1,46 +1,36 @@
-// Last updated: 7/23/2026, 10:32:01 AM
-1class Solution {
+// Last updated: 7/23/2026, 10:34:59 AM
+1import java.util.HashMap;
 2
-3    public int leastInterval(char[] tasks, int n) {
+3class Solution {
 4
-5        int[] freq = new int[26];
-6        for (char ch : tasks) {
-7            freq[ch - 'A']++;
-8        }
-9
-10        int time = 0;
-11
-12        while (true) {
-13
-14            boolean[] used = new boolean[26];
-15            for (int i = 0; i <= n; i++) {
+5    public int leastInterval(char[] tasks, int n) {
+6
+7        HashMap<Character, Integer> hm = new HashMap<>();
+8
+9        for (char ch : tasks) {
+10            if (hm.containsKey(ch)) {
+11                hm.put(ch, hm.get(ch) + 1);
+12            } else {
+13                hm.put(ch, 1);
+14            }
+15        }
 16
-17                int best = -1;
-18                for (int j = 0; j < 26; j++) {
-19                    if (freq[j] > 0 &&
-20                        !used[j] &&
-21                        (best == -1 || freq[j] > freq[best])) {
-22                        best = j;
-23                    }
-24                }
-25                if (best != -1) {
-26                    freq[best]--;
-27                    used[best] = true;
-28                }
-29
-30                time++;
-31                boolean done = true;
-32                for (int j = 0; j < 26; j++) {
-33                    if (freq[j] > 0) {
-34                        done = false;
-35                        break;
-36                    }
-37                }
-38
-39                if (done) {
-40                    return time;
-41                }
-42            }
-43        }
-44    }
-45}
+17        int maxFreq = 0;
+18        for (int val : hm.values()) {
+19            maxFreq = Math.max(maxFreq, val);
+20        }
+21
+22        int maxCount = 0;
+23        for (int val : hm.values()) {
+24            if (val == maxFreq) {
+25                maxCount++;
+26            }
+27        }
+28
+29        int emptySlots = (maxFreq - 1) * (n - (maxCount - 1));
+30        int availableTasks = tasks.length - maxFreq * maxCount;
+31        int idles = Math.max(0, emptySlots - availableTasks);
+32
+33        return tasks.length + idles;
+34    }
+35}
