@@ -1,36 +1,25 @@
-// Last updated: 7/23/2026, 10:34:59 AM
-1import java.util.HashMap;
-2
-3class Solution {
-4
-5    public int leastInterval(char[] tasks, int n) {
-6
-7        HashMap<Character, Integer> hm = new HashMap<>();
-8
-9        for (char ch : tasks) {
-10            if (hm.containsKey(ch)) {
-11                hm.put(ch, hm.get(ch) + 1);
-12            } else {
-13                hm.put(ch, 1);
-14            }
-15        }
-16
-17        int maxFreq = 0;
-18        for (int val : hm.values()) {
-19            maxFreq = Math.max(maxFreq, val);
-20        }
+// Last updated: 7/23/2026, 10:38:00 AM
+1class Solution {
+2    public int leastInterval(char[] tasks, int n) {
+3        int maxFreq = 0;
+4        int[] freq = new int[26];
+5        
+6        for(char t : tasks){
+7            freq[t - 'A']++;
+8        }
+9        
+10        for(int f : freq){
+11            maxFreq = Math.max(maxFreq, f);
+12        }
+13        
+14        int countMax = 0;
+15        
+16        for(int f : freq){
+17            if(f == maxFreq) countMax++;
+18        }
+19        
+20        int parts = (maxFreq - 1) * (n+1) + countMax;
 21
-22        int maxCount = 0;
-23        for (int val : hm.values()) {
-24            if (val == maxFreq) {
-25                maxCount++;
-26            }
-27        }
-28
-29        int emptySlots = (maxFreq - 1) * (n - (maxCount - 1));
-30        int availableTasks = tasks.length - maxFreq * maxCount;
-31        int idles = Math.max(0, emptySlots - availableTasks);
-32
-33        return tasks.length + idles;
-34    }
-35}
+22        return Math.max(parts, tasks.length);
+23    }
+24}
