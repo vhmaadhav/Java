@@ -1,7 +1,7 @@
-// Last updated: 8/7/2026, 11:25:38 AM
+// Last updated: 8/7/2026, 11:25:48 AM
 1class Solution {
 2    public int waysToSplitArray(int[] nums) {
-3        long count = 0;
+3        int count = 0;
 4        long left = 0;
 5        long total = 0;
 6        for(int n: nums){
